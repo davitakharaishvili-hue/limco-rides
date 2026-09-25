@@ -1,7 +1,9 @@
 @font-face{font-family:"NSG";font-weight:400;font-display:swap;src:url(noto-sans-georgian-georgian-400-normal.woff2) format("woff2");unicode-range:U+0589,U+10A0-10FF,U+1C90-1CBF,U+2D00-2D2F}
+@font-face{font-family:"NSG";font-weight:500;font-display:swap;src:url(noto-sans-georgian-georgian-500-normal.woff2) format("woff2");unicode-range:U+0589,U+10A0-10FF,U+1C90-1CBF,U+2D00-2D2F}
 @font-face{font-family:"NSG";font-weight:600;font-display:swap;src:url(noto-sans-georgian-georgian-600-normal.woff2) format("woff2");unicode-range:U+0589,U+10A0-10FF,U+1C90-1CBF,U+2D00-2D2F}
 @font-face{font-family:"NSG";font-weight:700;font-display:swap;src:url(noto-sans-georgian-georgian-700-normal.woff2) format("woff2");unicode-range:U+0589,U+10A0-10FF,U+1C90-1CBF,U+2D00-2D2F}
 @font-face{font-family:"NSG";font-weight:400;font-display:swap;src:url(noto-sans-georgian-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+2000-206F,U+20AC,U+2122,U+2190-21FF}
+@font-face{font-family:"NSG";font-weight:500;font-display:swap;src:url(noto-sans-georgian-latin-500-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+2000-206F,U+20AC,U+2122,U+2190-21FF}
 @font-face{font-family:"NSG";font-weight:600;font-display:swap;src:url(noto-sans-georgian-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+2000-206F,U+20AC,U+2122,U+2190-21FF}
 @font-face{font-family:"NSG";font-weight:700;font-display:swap;src:url(noto-sans-georgian-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+2000-206F,U+20AC,U+2122,U+2190-21FF}
 @font-face{font-family:"NSerG";font-weight:600;font-display:swap;src:url(noto-serif-georgian-georgian-600-normal.woff2) format("woff2");unicode-range:U+0589,U+10A0-10FF,U+1C90-1CBF,U+2D00-2D2F}
@@ -181,3 +183,70 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 .route{flex-direction:column;align-items:flex-start;gap:4px}
 .addr{display:flex;gap:8px;align-items:baseline}
 .addr .lbl{flex:0 0 62px;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--gold)}
+
+/* ================= typography refinement (v1.3) ================= */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{font-size:15.5px;line-height:1.5;text-rendering:optimizeLegibility;font-kerning:normal}
+b,strong{font-weight:600}
+/* Georgian has no capitals: no uppercase / wide tracking on Georgian labels */
+.authbox label,.card-form label,.panel h3,.card-form h3,.stat .k{text-transform:none;letter-spacing:.01em}
+.authbox label,.card-form label{font-size:12.5px;font-weight:500;color:var(--muted);margin:12px 0 5px}
+.card-form h3{font-size:13.5px;font-weight:600;color:var(--gold);margin:20px 0 2px}
+.panel h3{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:12px}
+
+.brand h1{font-size:24px;letter-spacing:.16em}
+.brand .tag{font-size:11.5px;letter-spacing:.22em;font-weight:500}
+.sync{font-size:12px;font-weight:500}
+.tab{font-size:15px;font-weight:500;letter-spacing:.01em}
+
+.monthnav{font-size:14px}
+.monthnav b{font-family:var(--serif);font-weight:600;font-size:15.5px;letter-spacing:.01em}
+.stat{padding:12px 14px}
+.stat .k{font-size:12.5px;font-weight:500;color:var(--muted)}
+.stat .v{font-size:23px;line-height:1.2;margin-top:4px;letter-spacing:-.01em;font-variant-numeric:tabular-nums lining-nums}
+.stat .s{font-size:12px;margin-top:3px}
+
+#upcoming{font-size:14px;line-height:1.65}
+#upcoming b{font-weight:600;color:var(--gold)}
+.chip{font-size:13.5px;font-weight:500}
+.addbtn{font-size:14.5px;font-weight:500;letter-spacing:.01em}
+input,textarea,select{font-size:16px;line-height:1.35}
+input::placeholder,textarea::placeholder{color:var(--muted-2)}
+
+.card{padding:17px 17px 14px}
+.name{font-size:19px;font-weight:600;letter-spacing:.005em;line-height:1.3}
+.pill{font-size:11.5px;font-weight:500;letter-spacing:.02em}
+.route{margin:12px 0 4px;gap:6px}
+.addr{font-size:15px;line-height:1.4;font-weight:500;color:var(--ink)}
+.addr .lbl{flex:0 0 66px;font-size:11px;font-weight:600;letter-spacing:.08em;padding-top:2px}
+.rt{font-size:12px;font-weight:500;margin-top:2px}
+.meta{font-size:13.5px;gap:6px 16px;margin-top:11px}
+.meta b{font-weight:600}
+.meta .price{font-size:15px;font-weight:700;font-variant-numeric:tabular-nums}
+.cbtn{font-size:13px}
+.note{font-size:13.5px;line-height:1.55}
+.btn{font-size:13.5px;font-weight:500;letter-spacing:.01em}
+.empty{font-size:15px}
+
+.yearnav b{font-size:21px;font-weight:700;letter-spacing:.02em}
+.mrow{font-size:14px}
+.mrow .amt{font-weight:600;font-variant-numeric:tabular-nums}
+.orow{font-size:14.5px}
+.orow b{font-weight:700;font-variant-numeric:tabular-nums}
+.sheethead h2{font-size:21px;font-weight:700;letter-spacing:.01em}
+.setrow{font-size:14px}
+.hint{font-size:13.5px;line-height:1.55}
+.toast{font-size:14px;font-weight:500}
+
+@media(max-width:420px){
+  body{font-size:15px}
+  .brand h1{font-size:22px}
+  .stat{padding:11px 11px}
+  .stat .k{font-size:11.5px}
+  .stat .v{font-size:19px}
+  .stat .s{font-size:11px}
+  .name{font-size:18px}
+  .addr{font-size:14.5px}
+  .addr .lbl{flex-basis:60px;font-size:10.5px}
+  .tab{font-size:14.5px}
+}
