@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ka">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LIMCO Rides</title>
+<meta name="theme-color" content="#0A0B0D">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="LIMCO Rides">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- LOGIN -->
+<section id="auth" class="screen hide">
+  <div class="authbox">
+    <div class="brand big"><h1>LIMCO</h1><span class="tag">Rides</span></div>
+    <p class="sub">შედი შენი ანგარიშით. ერთხელ შესვლის შემდეგ აპი ინტერნეტის გარეშეც იმუშავებს.</p>
+    <form id="loginForm">
+      <label>Email</label><input name="email" type="email" autocomplete="username" required>
+      <label>პაროლი</label><input name="password" type="password" autocomplete="current-password" required>
+      <button class="btn gold wide" type="submit">შესვლა</button>
+      <button class="linkbtn" type="button" id="forgotBtn">პაროლი დამავიწყდა</button>
+      <div class="err" id="authErr"></div>
+    </form>
+  </div>
+</section>
+
+<!-- APP -->
+<section id="app" class="screen hide">
+  <div class="wrap">
+    <header class="top">
+      <div class="toprow">
+        <div class="brand"><h1>LIMCO</h1><span class="tag">Rides</span></div>
+        <div class="topicons">
+          <span class="sync" id="sync" title=""><i></i><span id="syncTxt"></span></span>
+          <button class="iconbtn" id="settingsBtn" aria-label="პარამეტრები">⚙</button>
+        </div>
+      </div>
+      <nav class="tabs">
+        <button class="tab" data-view="rides" aria-selected="true">რაიდები</button>
+        <button class="tab" data-view="report" aria-selected="false">აღრიცხვა</button>
+      </nav>
+    </header>
+
+    <div id="backupBar" class="bar hide"></div>
+
+    <!-- RIDES VIEW -->
+    <div id="viewRides">
+      <div class="stats" id="stats"></div>
+      <div class="searchrow"><input id="search" type="search" placeholder="ძებნა: სახელი, ტელეფონი, მისამართი"></div>
+      <div class="chips" id="chips"></div>
+      <button class="addbtn" id="addBtn">+ ახალი რაიდი</button>
+      <div class="list" id="list"><div class="empty">იტვირთება…</div></div>
+    </div>
+
+    <!-- REPORT VIEW -->
+    <div id="viewReport" class="hide">
+      <div class="yearnav"><button class="iconbtn" id="yPrev">‹</button><b id="yLbl"></b><button class="iconbtn" id="yNext">›</button></div>
+      <div class="stats" id="yStats"></div>
+      <div class="panel"><h3>თვეების მიხედვით</h3><div id="months"></div></div>
+      <div class="panel"><h3>გადახდის მეთოდი</h3><div id="methods"></div></div>
+      <div class="panel"><h3>გადასახდელი (გაფორმდა, ჯერ არ გადაუხდია)</h3><div id="owed"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- RIDE FORM SHEET -->
+<div class="sheet hide" id="formSheet" role="dialog" aria-modal="true">
+  <form class="card-form" id="rideForm">
+    <div class="sheethead"><h2 id="formTitle">ახალი რაიდი</h2><button type="button" class="iconbtn" data-close>✕</button></div>
+    <div><label>სახელი</label><input name="name" required placeholder="John Weber"></div>
+    <div class="grid">
+      <div><label>ტელეფონი</label><input name="phone" inputmode="tel" placeholder="(720) ..."></div>
+      <div><label>Email</label><input name="email" type="email" placeholder="client@mail.com"></div>
+    </div>
+    <div><label>საიდან</label><input name="pickup" placeholder="Denver International Airport (DIA)"></div>
+    <div><label>სად</label><input name="destination" placeholder="Downtown Denver"></div>
+    <div class="grid">
+      <div><label>თარიღი</label><input name="dateISO" type="date" required></div>
+      <div><label>დრო</label><input name="time24" type="time"></div>
+    </div>
+    <label class="check"><input type="checkbox" name="roundTrip"> round trip (დაბრუნებით)</label>
+    <div class="grid rt-only hide">
+      <div><label>დაბრუნების თარიღი</label><input name="returnDateISO" type="date"></div>
+      <div><label>დაბრუნების დრო</label><input name="returnTime24" type="time"></div>
+    </div>
+    <div class="grid">
+      <div><label>მგზავრი</label><input name="passengers" type="number" min="1" inputmode="numeric" value="1"></div>
+      <div><label>ფასი $</label><input name="price" type="number" min="0" step="0.01" inputmode="decimal" placeholder="140"></div>
+    </div>
+    <div class="grid">
+      <div><label>სტატუსი</label>
+        <select name="status">
+          <option value="new">განხილვაში</option>
+          <option value="confirmed">გაფორმდა</option>
+          <option value="done">გადახდილი</option>
+          <option value="declined">უარი</option>
+        </select></div>
+      <div><label>გადახდის მეთოდი</label>
+        <select name="payMethod">
+          <option value="">—</option>
+          <option>Stripe</option><option>Card</option><option>Venmo</option>
+          <option>Cash App</option><option>Zelle</option><option>Cash</option><option>სხვა</option>
+        </select></div>
+    </div>
+    <div class="grid">
+      <div><label>ტიპი</label>
+        <select name="rideType">
+          <option value="">—</option>
+          <option>Airport</option><option>Red Rocks</option><option>Event</option>
+          <option>Hourly</option><option>Point-to-point</option><option>Mountain</option>
+        </select></div>
+      <div><label>წყარო</label>
+        <select name="source">
+          <option value="manual">ხელით</option><option value="form">საიტის ფორმა</option>
+          <option value="phone">ზარი / SMS</option><option value="lyft">Lyft</option><option value="repeat">მუდმივი კლიენტი</option>
+        </select></div>
+    </div>
+    <div><label>შენიშვნა</label><textarea name="note" rows="2" placeholder="სურვილისამებრ"></textarea></div>
+    <div class="frow">
+      <button type="button" class="btn" data-close>გაუქმება</button>
+      <button type="submit" class="btn gold">შენახვა</button>
+    </div>
+  </form>
+</div>
+
+<!-- SETTINGS SHEET -->
+<div class="sheet hide" id="setSheet" role="dialog" aria-modal="true">
+  <div class="card-form">
+    <div class="sheethead"><h2>პარამეტრები</h2><button type="button" class="iconbtn" data-close>✕</button></div>
+    <div class="setrow"><span>ანგარიში</span><b id="setUser">—</b></div>
+    <div class="setrow"><span>სინქრონიზაცია</span><b id="setSync">—</b></div>
+
+    <h3>LIMCO History საქაღალდე</h3>
+    <p class="hint" id="folderHint"></p>
+    <div class="frow left">
+      <button class="btn gold" id="pickFolder">საქაღალდის არჩევა</button>
+      <button class="btn" id="backupNow">ახლავე შენახვა</button>
+    </div>
+
+    <h3>ექსპორტი / იმპორტი</h3>
+    <div class="frow left">
+      <button class="btn" id="expCsv">Excel (CSV)</button>
+      <button class="btn" id="expJson">JSON ბექაპი</button>
+      <label class="btn">JSON იმპორტი<input type="file" id="impJson" accept=".json,application/json" hidden></label>
+    </div>
+
+    <h3>აპის დაყენება</h3>
+    <p class="hint" id="installHint">კომპიუტერზე: Chrome-ის მისამართის ზოლში დააჭირე „Install“ ღილაკს. ტელეფონზე: ბრაუზერის მენიუ → „Add to Home Screen“.</p>
+    <div class="frow left"><button class="btn gold hide" id="installBtn">დაყენება</button></div>
+
+    <div class="frow left" style="margin-top:18px">
+      <button class="btn no" id="signOut">გასვლა</button>
+    </div>
+    <p class="hint small" id="ver"></p>
+  </div>
+</div>
+
+<div class="toast hide" id="toast"><span id="toastTxt"></span><button id="toastAct" class="linkbtn hide"></button></div>
+
+<script src="config.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>
