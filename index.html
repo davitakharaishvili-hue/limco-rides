@@ -52,7 +52,8 @@
 
     <!-- RIDES VIEW -->
     <div id="viewRides">
-      <div class="stats" id="stats"></div>
+      <div class="bar hide" id="upcoming"></div>
+    <div class="stats" id="stats"></div>
       <div class="searchrow"><input id="search" type="search" placeholder="ძებნა: სახელი, ტელეფონი, მისამართი"></div>
       <div class="chips" id="chips"></div>
       <button class="addbtn" id="addBtn">+ ახალი რაიდი</button>
@@ -150,6 +151,10 @@
       <button class="btn" id="expJson">JSON ბექაპი</button>
       <label class="btn">JSON იმპორტი<input type="file" id="impJson" accept=".json,application/json" hidden></label>
     </div>
+
+    <h3>შეხსენებები</h3>
+    <p class="hint" id="notifHint"></p>
+    <div class="frow left"><button class="btn gold" id="notifBtn">შეტყობინებების ჩართვა</button></div>
 
     <h3>აპის დაყენება</h3>
     <p class="hint" id="installHint">კომპიუტერზე: Chrome-ის მისამართის ზოლში დააჭირე „Install“ ღილაკს. ტელეფონზე: ბრაუზერის მენიუ → „Add to Home Screen“.</p>

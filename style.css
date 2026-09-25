@@ -176,3 +176,5 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 }
 
 .btn.icon{padding:8px 10px;font-size:15px;min-width:36px}
+#upcoming{display:block;border-color:rgba(233,188,138,.45);color:var(--ink);line-height:1.6}
+#upcoming.hide{display:none!important}
