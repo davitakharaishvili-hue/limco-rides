@@ -1,4 +1,4 @@
-const CACHE = "limco-1921a7bc78";
+const CACHE = "limco-b35cba1156";
 const ASSETS = ["./","./app.js","./apple-touch-icon.png","./config.js","./icon-192.png","./icon-512.png","./index.html","./manifest.webmanifest","./maskable-512.png","./noto-sans-georgian-georgian-400-normal.woff2","./noto-sans-georgian-georgian-500-normal.woff2","./noto-sans-georgian-georgian-600-normal.woff2","./noto-sans-georgian-georgian-700-normal.woff2","./noto-sans-georgian-latin-400-normal.woff2","./noto-sans-georgian-latin-500-normal.woff2","./noto-sans-georgian-latin-600-normal.woff2","./noto-sans-georgian-latin-700-normal.woff2","./noto-serif-georgian-georgian-600-normal.woff2","./noto-serif-georgian-georgian-700-normal.woff2","./noto-serif-georgian-latin-600-normal.woff2","./noto-serif-georgian-latin-700-normal.woff2","./style.css"];
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting()));
